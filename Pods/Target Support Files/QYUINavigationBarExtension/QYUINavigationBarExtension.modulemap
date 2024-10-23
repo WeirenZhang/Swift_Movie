@@ -1,0 +1,6 @@
+framework module QYUINavigationBarExtension {
+  umbrella header "QYUINavigationBarExtension-umbrella.h"
+
+  export *
+  module * { export * }
+}

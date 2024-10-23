@@ -1,0 +1,6 @@
+framework module EmptyDataSetExtension {
+  umbrella header "EmptyDataSetExtension-umbrella.h"
+
+  export *
+  module * { export * }
+}

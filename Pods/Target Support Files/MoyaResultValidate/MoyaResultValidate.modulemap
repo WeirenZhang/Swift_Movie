@@ -1,0 +1,6 @@
+framework module MoyaResultValidate {
+  umbrella header "MoyaResultValidate-umbrella.h"
+
+  export *
+  module * { export * }
+}

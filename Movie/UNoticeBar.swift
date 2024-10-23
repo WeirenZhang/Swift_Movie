@@ -65,7 +65,6 @@ extension UNoticeBarStyle {
         }
         
         return properties
-        
     }
     
     fileprivate func noticeBarOriginY(superViewHeight: CGFloat, _ height: CGFloat) -> CGFloat {
@@ -155,14 +154,14 @@ open class UNoticeBar: UIView {
             [weak self] in
             guard let strongSelf = self else { return }
             let currentWindowLevel = strongSelf.config.barStyle.beginWindowLevel
-            UIApplication.shared.keyWindow?.windowLevel = currentWindowLevel
+            UIApplication.keyWindow?.windowLevel = currentWindowLevel
         }, completed: {
             [weak self] (finished) in
             guard let strongSelf = self else { return }
             completed?(finished)
             if finished {
                 let currentWindowLevel = strongSelf.config.barStyle.endWindowLevel
-                UIApplication.shared.keyWindow?.windowLevel = currentWindowLevel
+                UIApplication.keyWindow?.windowLevel = currentWindowLevel
             }
         })
     }
@@ -235,7 +234,7 @@ open class UNoticeBar: UIView {
     
     private func show(duration: TimeInterval, willShow: () -> Void, completed: ((_ finished: Bool) -> Void)?) {
         
-        if let subviews = UIApplication.shared.keyWindow?.subviews {
+        if let subviews = UIApplication.keyWindow?.subviews {
             for view in subviews {
                 if view.isKind(of: UNoticeBar.self) {
                     view.removeFromSuperview()
@@ -244,13 +243,13 @@ open class UNoticeBar: UIView {
         }
         willShow()
         
-        UIApplication.shared.keyWindow?.addSubview(self)
+        UIApplication.keyWindow?.addSubview(self)
         self.transform = config.animationType.noticeBarViewTransform(with: frame, self.config.barStyle)
         UIView.animate(withDuration: 0.4,
                        delay: 0, options: .curveEaseInOut,
                        animations: {
-                        self.transform = CGAffineTransform.identity
-                       }) { (_) in
+            self.transform = CGAffineTransform.identity
+        }) { (_) in
             DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
                 UIView.animate(withDuration: 0.4, animations: {
                     self.transform = self.config.animationType.noticeBarViewTransform(with: self.frame, self.config.barStyle)
@@ -260,5 +259,4 @@ open class UNoticeBar: UIView {
             })
         }
     }
-    
 }

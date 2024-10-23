@@ -80,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func updateLabelColourWhenReachable(_ reachability: Reachability) {
+        
         print("\(reachability.description) - \(reachability.connection)")
         if reachability.connection == .wifi {
             //self.networkStatus.textColor = .green
@@ -121,9 +122,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        LibsManager.setupLibs(with: window)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.backgroundColor = UIColor.white
-        window!.rootViewController = ViewController()
+        window!.rootViewController = HomeViewController()
         window!.makeKeyAndVisible()
         
         try! db?.run(movie.create(ifNotExists: true, block: { (table) in
@@ -143,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             table.column(adds)
         }))
         
-        startHost(at: 0)
+        //startHost(at: 0)
         
         return true
     }
