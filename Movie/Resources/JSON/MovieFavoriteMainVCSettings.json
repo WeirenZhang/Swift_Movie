@@ -1,16 +1,16 @@
 [
     {
-    "vcName": "MovieMyFavouriteViewController",
-    "title": "電影",
-    "normalImage": "movieclapper",
-    "selectedImage": "movieclapper.fill",
-    "navigationName": "NavigationController"
+        "vcName": "MovieMyFavouriteViewController",
+        "title": "電影",
+        "normalImage": "movieclapper",
+        "selectedImage": "movieclapper.fill",
+        "navigationName": "NavigationController"
     },
     {
-    "vcName": "TheaterMyFavouriteViewController",
-    "title": "電影院",
-    "normalImage": "popcorn",
-    "selectedImage": "popcorn.fill",
-    "navigationName": "NavigationController"
+        "vcName": "TheaterMyFavouriteViewController",
+        "title": "電影院",
+        "normalImage": "popcorn",
+        "selectedImage": "popcorn.fill",
+        "navigationName": "NavigationController"
     }
- ]
+]

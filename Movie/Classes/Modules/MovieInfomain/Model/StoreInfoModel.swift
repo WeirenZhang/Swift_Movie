@@ -9,5 +9,5 @@ import Foundation
 
 public struct StoreInfoModel: Codable {
     
-    let  storeInfo: String
+    let storeInfo: String
 }

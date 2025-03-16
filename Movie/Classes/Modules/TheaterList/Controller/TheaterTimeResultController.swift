@@ -172,12 +172,18 @@ class TheaterTimeResultController: VMTableViewController<TheaterResultViewModel>
                 cell.frame = tableView.bounds
                 cell.layoutIfNeeded()
                 cell.item = element
+                let backgroundView = UIView()
+                backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+                cell.selectedBackgroundView = backgroundView
                 return cell
             } else {
                 let cell = TheaterTimeResultCell(style: .default, reuseIdentifier: CellIdentifier)
                 cell.frame = tableView.bounds
                 cell.layoutIfNeeded()
                 cell.item = element
+                let backgroundView = UIView()
+                backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+                cell.selectedBackgroundView = backgroundView
                 return cell
             }
         }.disposed(by: rx.disposeBag)

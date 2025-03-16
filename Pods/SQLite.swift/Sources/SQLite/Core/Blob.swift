@@ -37,22 +37,18 @@ public struct Blob {
 
     public func toHex() -> String {
         bytes.map {
-            ($0 < 16 ? "0" : "") + String($0, radix: 16, uppercase: false)
+           ($0 < 16 ? "0" : "") + String($0, radix: 16, uppercase: false)
         }.joined(separator: "")
     }
-
 }
 
 extension Blob: CustomStringConvertible {
-
     public var description: String {
         "x'\(toHex())'"
     }
-
 }
 
 extension Blob: Equatable {
-
 }
 
 public func ==(lhs: Blob, rhs: Blob) -> Bool {

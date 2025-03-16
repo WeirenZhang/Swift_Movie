@@ -29,13 +29,12 @@ class MineCollectionViewCell: BaseCollectionViewCell {
         iconView.snp.makeConstraints{ make in
             make.left.right.equalToSuperview()
             make.top.equalTo(10)
-            make.height.equalTo(contentView.snp.width).multipliedBy(0.5)
         }
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints{ make in
             make.left.bottom.right.equalToSuperview()
-            make.top.equalTo(iconView.snp.bottom).offset(-15)
+            make.top.equalTo(iconView.snp.bottom).offset(5)
         }
     }
     

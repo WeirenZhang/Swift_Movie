@@ -61,9 +61,6 @@ target 'Movie' do
   # Codable
   # https://github.com/Pircate/CleanJSON
   pod 'CleanJSON'
-  # Keyboard
-  # https://github.com/hackiftekhar/IQKeyboardManager
-  pod 'IQKeyboardManagerSwift'
   # HUD
   # https://github.com/ninjaprox/NVActivityIndicatorView
   pod 'NVActivityIndicatorView'
@@ -95,19 +92,8 @@ target 'Movie' do
   pod 'SnapKitExtend'
   pod 'Then'
   pod 'Moya'
-  pod 'SwiftyJSON', '~> 4.0'
-  pod 'Kingfisher', '~> 7.6.2'
   pod 'Reusable'
-  pod 'MJRefresh'
-  pod 'MBProgressHUD'
-  pod 'HMSegmentedControl'
-  pod 'IQKeyboardManagerSwift'
-  pod 'EmptyDataSet-Swift'
-  pod 'UINavigation-SXFixSpace'
-  pod 'Parchment', '~> 3.2'
-  pod 'HandyJSON'
-  pod 'SQLite.swift', '~> 0.13.3'
-  pod 'Toast-Swift', '~> 5.0.1'
+  pod 'SQLite.swift', '~> 0.14.0'
   pod 'ReachabilitySwift'
   
 end

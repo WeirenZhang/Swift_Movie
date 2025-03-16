@@ -21,22 +21,22 @@ extension ConstraintView {
 }
 
 let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-let db = try? Connection("\(path)/Movie.sqlite")
+let db = try? Connection("\(path)/db.sqlite3")
 
 let movie = Table("movie")
 let theater = Table("theater")
 
-let id = Expression<Int64>("id")
-let ahref = Expression<String>("ahref")
-let imgsrc = Expression<String>("imgsrc")
-let release_movie_name = Expression<String>("release_movie_name")
-let en = Expression<String>("en")
-let release_movie_time = Expression<String>("release_movie_time")
+let id = SQLite.Expression<Int64>("id")
+let ahref = SQLite.Expression<String>("ahref")
+let imgsrc = SQLite.Expression<String>("imgsrc")
+let release_movie_name = SQLite.Expression<String>("release_movie_name")
+let en = SQLite.Expression<String>("en")
+let release_movie_time = SQLite.Expression<String>("release_movie_time")
 
-let href = Expression<String>("href")
-let name = Expression<String>("name")
-let tel = Expression<String>("tel")
-let adds = Expression<String>("adds")
+let href = SQLite.Expression<String>("href")
+let name = SQLite.Expression<String>("name")
+let tel = SQLite.Expression<String>("tel")
+let adds = SQLite.Expression<String>("adds")
 
 
 

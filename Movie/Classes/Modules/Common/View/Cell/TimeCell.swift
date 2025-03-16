@@ -27,7 +27,7 @@ class TimeCell: CollectionViewCell, Reusable {
             
             guard let item else { return }
             
-            backgroundColor = UIColor.systemGray6
+            backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1.0)
             
             contentView.addSubview(titleLabel)
             titleLabel.snp.makeConstraints{

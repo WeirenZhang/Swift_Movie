@@ -65,8 +65,10 @@ class MyFavouriteViewController: UITabBarController {
             return
         }
         
-        childVc.tabBarItem.image = UIImage(systemName: normalImage ?? "")
-        childVc.tabBarItem.selectedImage = UIImage(systemName: selectedImage ?? "")
+        //childVc.tabBarItem.image = UIImage(systemName: normalImage ?? "")
+        childVc.tabBarItem.image = UIImage(named: normalImage ?? "")
+        //childVc.tabBarItem.selectedImage = UIImage(systemName: selectedImage ?? "")
+        childVc.tabBarItem.selectedImage = UIImage(named: selectedImage ?? "")
         childVc.tabBarItem.title = title
         
         if
@@ -92,6 +94,7 @@ class MyFavouriteViewController: UITabBarController {
         if #available(iOS 15.0, *) {
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         }
+
         tabBar.hero.modifiers = [.useGlobalCoordinateSpace,
                                  .useNoSnapshot,
                                  .zPosition(10),

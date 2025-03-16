@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 //
 
-public protocol ExpressionType: Expressible { // extensions cannot have inheritance clauses
+public protocol ExpressionType: Expressible, CustomStringConvertible { // extensions cannot have inheritance clauses
 
     associatedtype UnderlyingType = Void
 
@@ -47,6 +47,9 @@ extension ExpressionType {
         self.init(expression.template, expression.bindings)
     }
 
+    public var description: String {
+        asSQL()
+    }
 }
 
 /// An `Expression` represents a raw SQL fragment and any associated bindings.
@@ -73,23 +76,19 @@ public protocol Expressible {
 extension Expressible {
 
     // naïve compiler for statements that can’t be bound, e.g., CREATE TABLE
-    // FIXME: make internal (0.13.0)
-    public func asSQL() -> String {
+    func asSQL() -> String {
         let expressed = expression
-        var idx = 0
-        return expressed.template.reduce("") { template, character in
-            let transcoded: String
+        return expressed.template.reduce(("", 0)) { memo, character in
+            let (template, index) = memo
 
             if character == "?" {
-                transcoded = transcode(expressed.bindings[idx])
-                idx += 1
+                precondition(index < expressed.bindings.count, "not enough bindings for expression")
+                return (template + transcode(expressed.bindings[index]), index + 1)
             } else {
-                transcoded = String(character)
+                return (template + String(character), index)
             }
-            return template + transcoded
-        }
+        }.0
     }
-
 }
 
 extension ExpressionType {

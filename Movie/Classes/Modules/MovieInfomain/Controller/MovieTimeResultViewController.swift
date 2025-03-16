@@ -34,7 +34,7 @@ class MovieTimeResultViewController: TableViewController {
         
         super.makeUI()
         
-        tableView.backgroundColor = UIColor.systemGray6
+        tableView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1.0)
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(MovieTimeResultCell.self, forCellReuseIdentifier: "Cell")
@@ -61,6 +61,9 @@ class MovieTimeResultViewController: TableViewController {
                     cell.frame = tableView.bounds
                     cell.layoutIfNeeded()
                     cell.item = item
+                    let backgroundView = UIView()
+                    backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+                    cell.selectedBackgroundView = backgroundView
                     return cell
                 } else {
                     let cell = MovieTimeResultCell(style: .default, reuseIdentifier: CellIdentifier)
@@ -75,6 +78,9 @@ class MovieTimeResultViewController: TableViewController {
                     cell.frame = tableView.bounds
                     cell.layoutIfNeeded()
                     cell.item = item
+                    let backgroundView = UIView()
+                    backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+                    cell.selectedBackgroundView = backgroundView
                     return cell
                 }
             }

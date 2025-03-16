@@ -67,6 +67,9 @@ class MovieInfoViewController: VMTableViewController<MovieInfoViewModel> {
         output.items.drive(tableView.rx.items) { tableView, row, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", cellType: MovieInfoCell.self)
             cell.item = item
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+            cell.selectedBackgroundView = backgroundView
             return cell
         }
         .disposed(by: rx.disposeBag)

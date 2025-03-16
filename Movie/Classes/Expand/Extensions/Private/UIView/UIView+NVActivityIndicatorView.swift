@@ -52,7 +52,7 @@ extension UIView {
                                                                   y: 0,
                                                                   width: 60,
                                                                   height: 60),
-                                                    type: .ballRotateChase,
+                                                    type: .ballSpinFadeLoader,
                                                     color: .main,
                                                     padding: 0)
             activityIndicatorView = indicatorView

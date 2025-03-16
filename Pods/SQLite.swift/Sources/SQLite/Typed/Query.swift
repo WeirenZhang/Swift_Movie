@@ -193,12 +193,14 @@ extension QueryType {
     ///
     /// - Parameters:
     ///
+    ///   - all: If false, duplicate rows are removed from the result.
+    ///
     ///   - table: A query representing the other table.
     ///
     /// - Returns: A query with the given `UNION` clause applied.
-    public func union(_ table: QueryType) -> Self {
+    public func union(all: Bool = false, _ table: QueryType) -> Self {
         var query = self
-        query.clauses.union.append(table)
+        query.clauses.union.append((all, table))
         return query
     }
 
@@ -596,9 +598,9 @@ extension QueryType {
             return nil
         }
 
-        return " ".join(clauses.union.map { query in
+        return " ".join(clauses.union.map { (all, query) in
             " ".join([
-                Expression<Void>(literal: "UNION"),
+                Expression<Void>(literal: all ? "UNION ALL" : "UNION"),
                 query
             ])
         })
@@ -856,6 +858,7 @@ extension QueryType {
 
     public var expression: Expression<Void> {
         let clauses: [Expressible?] = [
+            withClause,
             selectClause,
             joinClause,
             whereClause,
@@ -988,6 +991,15 @@ public struct RowIterator: FailableIterator {
         }
         return elements
     }
+
+    public func compactMap<T>(_ transform: (Element) throws -> T?) throws -> [T] {
+        var elements = [T]()
+        while let row = try failableNext() {
+            guard let element = try transform(row) else { continue }
+            elements.append(element)
+        }
+        return elements
+    }
 }
 
 extension Connection {
@@ -1007,6 +1019,14 @@ extension Connection {
         let expression = query.expression
         let statement = try prepare(expression.template, expression.bindings)
         return RowIterator(statement: statement, columnNames: try columnNamesForQuery(query))
+    }
+
+    public func prepareRowIterator(_ statement: String, bindings: Binding?...) throws -> RowIterator {
+        try prepare(statement, bindings).prepareRowIterator()
+    }
+
+    public func prepareRowIterator(_ statement: String, bindings: [Binding?]) throws -> RowIterator {
+        try prepare(statement, bindings).prepareRowIterator()
     }
 
     private func columnNamesForQuery(_ query: QueryType) throws -> [String: Int] {
@@ -1032,11 +1052,9 @@ extension Connection {
                 select.clauses.select = (false, [Expression<Void>(literal: "*") as Expressible])
                 let queries = [select] + query.clauses.join.map { $0.query }
                 if !namespace.isEmpty {
-                    for q in queries {
-                        if q.tableName().expression.template == namespace {
-                            try expandGlob(true)(q)
-                            continue column
-                        }
+                    for q in queries where q.tableName().expression.template == namespace {
+                        try expandGlob(true)(q)
+                        continue column
                     }
                     throw QueryError.noSuchTable(name: namespace)
                 }
@@ -1169,16 +1187,25 @@ public struct Row {
         }
 
         guard let idx = columnNames[column.template] else {
-            let similar = Array(columnNames.keys).filter { $0.hasSuffix(".\(column.template)") }
-
-            switch similar.count {
-            case 0:
-                throw QueryError.noSuchColumn(name: column.template, columns: columnNames.keys.sorted())
-            case 1:
-                return valueAtIndex(columnNames[similar[0]]!)
-            default:
-                throw QueryError.ambiguousColumn(name: column.template, similar: similar)
+            func similar(_ name: String) -> Bool {
+                return name.hasSuffix(".\(column.template)")
             }
+
+            guard let firstIndex = columnNames.firstIndex(where: { similar($0.key) }) else {
+                throw QueryError.noSuchColumn(name: column.template, columns: columnNames.keys.sorted())
+            }
+
+            let secondIndex = columnNames
+                .suffix(from: columnNames.index(after: firstIndex))
+                .firstIndex(where: { similar($0.key) })
+
+            guard secondIndex == nil else {
+                throw QueryError.ambiguousColumn(
+                    name: column.template,
+                    similar: columnNames.keys.filter(similar).sorted()
+                )
+            }
+            return valueAtIndex(columnNames[firstIndex].value)
         }
 
         return valueAtIndex(idx)
@@ -1242,7 +1269,9 @@ public struct QueryClauses {
 
     var limit: (length: Int, offset: Int?)?
 
-    var union = [QueryType]()
+    var union = [(all: Bool, table: QueryType)]()
+
+    var with = WithClauses()
 
     fileprivate init(_ name: String, alias: String?, database: String?) {
         from = (name, alias, database)

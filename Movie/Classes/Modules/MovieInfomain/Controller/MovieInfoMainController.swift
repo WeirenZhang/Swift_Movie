@@ -124,8 +124,10 @@ class MovieInfoMainController: UITabBarController {
             return
         }
         
-        childVc.tabBarItem.image = UIImage(systemName: normalImage ?? "")
-        childVc.tabBarItem.selectedImage = UIImage(systemName: selectedImage ?? "")
+        //childVc.tabBarItem.image = UIImage(systemName: normalImage ?? "")
+        childVc.tabBarItem.image = UIImage(named: normalImage ?? "")
+        //childVc.tabBarItem.selectedImage = UIImage(systemName: selectedImage ?? "")
+        childVc.tabBarItem.selectedImage = UIImage(named: selectedImage ?? "")
         childVc.tabBarItem.title = title
         
         if

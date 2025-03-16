@@ -4,7 +4,6 @@ PODS:
   - DefaultsKit (0.2.0)
   - Differentiator (5.0.0)
   - DZNEmptyDataSet (1.8.1)
-  - EmptyDataSet-Swift (5.0.0)
   - EmptyDataSetExtension/Core (1.1.0):
     - DZNEmptyDataSet (~> 1.8.1)
   - EmptyDataSetExtension/RxSwift (1.1.0):
@@ -12,10 +11,7 @@ PODS:
     - RxCocoa (~> 6.2.0)
     - RxSwift (~> 6.2.0)
   - FDFullscreenPopGesture (1.1)
-  - HandyJSON (5.0.2)
   - Hero (1.6.2)
-  - HMSegmentedControl (1.5.6)
-  - IQKeyboardManagerSwift (6.5.6)
   - Jelly (2.3.0)
   - JXCategoryView (1.6.1)
   - Kingfisher (7.6.2)
@@ -34,7 +30,6 @@ PODS:
   - libwebp/sharpyuv (1.3.2)
   - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
-  - MBProgressHUD (1.2.0)
   - MJRefresh (3.7.2)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
@@ -50,7 +45,6 @@ PODS:
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
-  - Parchment (3.2.0)
   - QYUINavigationBarExtension (1.0.0)
   - R.swift (7.3.2)
   - ReachabilitySwift (5.0.0)
@@ -101,43 +95,34 @@ PODS:
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
     - URLNavigator
-  - SnapKit (5.0.1)
+  - SnapKit (5.7.1)
   - SnapKitExtend (1.1.0):
     - SnapKit
-  - SQLite.swift (0.13.3):
-    - SQLite.swift/standard (= 0.13.3)
-  - SQLite.swift/standard (0.13.3)
+  - SQLite.swift (0.14.1):
+    - SQLite.swift/standard (= 0.14.1)
+  - SQLite.swift/standard (0.14.1)
   - Storable (0.1.1)
   - SwiftLint (0.54.0)
-  - SwiftyJSON (4.3.0)
   - Then (2.7.0)
   - Toast-Swift (5.0.1)
-  - UINavigation-SXFixSpace (1.2.4)
   - "UITableView+FDTemplateLayoutCell (1.6)"
   - URLNavigator (2.5.1)
 
 DEPENDENCIES:
   - CleanJSON
   - DefaultsKit
-  - EmptyDataSet-Swift
   - EmptyDataSetExtension/RxSwift
   - FDFullscreenPopGesture
-  - HandyJSON
   - Hero
-  - HMSegmentedControl
-  - IQKeyboardManagerSwift
   - Jelly
   - JXCategoryView
   - Kingfisher
-  - Kingfisher (~> 7.6.2)
   - KingfisherWebP
-  - MBProgressHUD
   - MJRefresh
   - Moya
   - MoyaResultValidate
   - "NSObject+Rx"
   - NVActivityIndicatorView
-  - Parchment (~> 3.2)
   - QYUINavigationBarExtension
   - R.swift
   - ReachabilitySwift
@@ -154,13 +139,10 @@ DEPENDENCIES:
   - RxSwiftExt
   - RxURLNavigator
   - SnapKitExtend
-  - SQLite.swift (~> 0.13.3)
+  - SQLite.swift (~> 0.14.0)
   - SwiftLint
-  - SwiftyJSON (~> 4.0)
   - Then
   - Toast-Swift
-  - Toast-Swift (~> 5.0.1)
-  - UINavigation-SXFixSpace
   - "UITableView+FDTemplateLayoutCell"
 
 SPEC REPOS:
@@ -170,25 +152,19 @@ SPEC REPOS:
     - DefaultsKit
     - Differentiator
     - DZNEmptyDataSet
-    - EmptyDataSet-Swift
     - EmptyDataSetExtension
     - FDFullscreenPopGesture
-    - HandyJSON
     - Hero
-    - HMSegmentedControl
-    - IQKeyboardManagerSwift
     - Jelly
     - JXCategoryView
     - Kingfisher
     - KingfisherWebP
     - libwebp
-    - MBProgressHUD
     - MJRefresh
     - Moya
     - MoyaResultValidate
     - "NSObject+Rx"
     - NVActivityIndicatorView
-    - Parchment
     - QYUINavigationBarExtension
     - R.swift
     - ReachabilitySwift
@@ -209,10 +185,8 @@ SPEC REPOS:
     - SQLite.swift
     - Storable
     - SwiftLint
-    - SwiftyJSON
     - Then
     - Toast-Swift
-    - UINavigation-SXFixSpace
     - "UITableView+FDTemplateLayoutCell"
     - URLNavigator
 
@@ -222,25 +196,19 @@ SPEC CHECKSUMS:
   DefaultsKit: 6c767941b2c3fe34c4d70e300e6c3b80c94964dd
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  EmptyDataSet-Swift: eb382c0c87a2d9c678077385a595cec52da38171
   EmptyDataSetExtension: fa623643143a4e6deea78d745dc3f9aad93a3e74
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   Hero: c69009dbc9e2f0472e081adc644dba05fcedae72
-  HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
-  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Jelly: 5c6315db07d392b178ebf9edf27072a294d4f434
   JXCategoryView: 7b1ee69ede4843c581688afe84d0f047723262f2
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   KingfisherWebP: 338d6e1fa63129a18d940a1d9aef76abdac042f3
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
-  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   MoyaResultValidate: 0b417d6e5020e0114f4026f68e8c2e1730e2697d
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
-  Parchment: a43c440b22c8a60f7e0196b74339446d4d1d18ea
   QYUINavigationBarExtension: 503bfd7415e46f64da94dfa9f342f1e18d7edd95
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
@@ -256,18 +224,16 @@ SPEC CHECKSUMS:
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   RxSwiftExt: 43aaacb6a4d3c69c55e9d1cf4f79920043d13583
   RxURLNavigator: 31bf8ab1ae0bf497a4f85e42bf416c2f7365ceed
-  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SnapKitExtend: aa30cf37196195fae9c4354686cc7710184ebfcc
-  SQLite.swift: 903bfa3bc9ab06345fdfbb578e34f47cfcf417da
+  SQLite.swift: 2992550ebf3c5b268bf4352603e3df87d2a4ed72
   Storable: 31d19a4f897d68d1f1843604b60e12e5c2e1db5f
   SwiftLint: c1de071d9d08c8aba837545f6254315bc900e211
-  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
-  UINavigation-SXFixSpace: 10f223253ebff2ceefa26694e23b7694269763c4
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   URLNavigator: e9c0426ba6e6ac57f34d018bbf3df840797f984d
 
-PODFILE CHECKSUM: c6c59e39c1342ce5fdf5bf63eda776ce76d0c968
+PODFILE CHECKSUM: 1eb02a2b058dae8e05f2c1ad56fa2929b2c1f23e
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.16.2

@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.addSubview(collectionView)
+        view.backgroundColor = UIColor.white
         
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
@@ -86,7 +87,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = floor(Double(.screenWidth - 40.0) / 3.0)
-        return CGSize(width: width, height: (width * 0.75 + 30))
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

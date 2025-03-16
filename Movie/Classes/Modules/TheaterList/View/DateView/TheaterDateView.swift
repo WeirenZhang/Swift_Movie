@@ -128,6 +128,11 @@ extension TheaterDateView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = date[indexPath.row].date
+        cell.textLabel!.textColor = UIColor.black
+        cell.backgroundColor = UIColor.white
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+        cell.selectedBackgroundView = backgroundView
         return cell
     }
     

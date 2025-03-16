@@ -69,8 +69,8 @@ class MovieTimeResultCell: TableViewCell, Reusable {
             TheaterName.text = item.theater
             
             //CollectionView.backgroundColor = UIColor.orange
-            CollectionView.delegate = self
-            CollectionView.dataSource = self
+            //CollectionView.delegate = self
+            //CollectionView.dataSource = self
             contentView.addSubview(CollectionView)
             
             CollectionView.snp.makeConstraints {

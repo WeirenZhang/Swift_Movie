@@ -86,12 +86,22 @@ extension QueryType {
     /// - Returns: An `INSERT` statement for the encodable objects
     public func insertMany(_ encodables: [Encodable], userInfo: [CodingUserInfoKey: Any] = [:],
                            otherSetters: [Setter] = []) throws -> Insert {
-        let combinedSetters = try encodables.map { encodable -> [Setter] in
-            let encoder = SQLiteEncoder(userInfo: userInfo)
+        let combinedSettersWithoutNils = try encodables.map { encodable -> [Setter] in
+            let encoder = SQLiteEncoder(userInfo: userInfo, forcingNilValueSetters: false)
             try encodable.encode(to: encoder)
             return encoder.setters + otherSetters
         }
-        return self.insertMany(combinedSetters)
+        // requires the same number of setters per encodable
+        guard Set(combinedSettersWithoutNils.map(\.count)).count == 1 else {
+            // asymmetric sets of value insertions (some nil, some not), requires NULL value to satisfy INSERT query
+            let combinedSymmetricSetters = try encodables.map { encodable -> [Setter] in
+                let encoder = SQLiteEncoder(userInfo: userInfo, forcingNilValueSetters: true)
+                try encodable.encode(to: encoder)
+                return encoder.setters + otherSetters
+            }
+            return self.insertMany(combinedSymmetricSetters)
+        }
+        return self.insertMany(combinedSettersWithoutNils)
     }
 
     /// Creates an `INSERT ON CONFLICT DO UPDATE` statement, aka upsert, by encoding the given object
@@ -165,9 +175,11 @@ private class SQLiteEncoder: Encoder {
 
         let encoder: SQLiteEncoder
         let codingPath: [CodingKey] = []
+        let forcingNilValueSetters: Bool
 
-        init(encoder: SQLiteEncoder) {
+        init(encoder: SQLiteEncoder, forcingNilValueSetters: Bool = false) {
             self.encoder = encoder
+            self.forcingNilValueSetters = forcingNilValueSetters
         }
 
         func superEncoder() -> Swift.Encoder {
@@ -202,18 +214,70 @@ private class SQLiteEncoder: Encoder {
             encoder.setters.append(Expression(key.stringValue) <- value)
         }
 
+        func encodeIfPresent(_ value: Int?, forKey key: SQLiteEncoder.SQLiteKeyedEncodingContainer<Key>.Key) throws {
+            if let value = value {
+                try encode(value, forKey: key)
+            } else if forcingNilValueSetters {
+                encoder.setters.append(Expression<Int?>(key.stringValue) <- nil)
+            }
+        }
+
+        func encodeIfPresent(_ value: Bool?, forKey key: Key) throws {
+            if let value = value {
+                try encode(value, forKey: key)
+            } else if forcingNilValueSetters {
+                encoder.setters.append(Expression<Bool?>(key.stringValue) <- nil)
+            }
+        }
+
+        func encodeIfPresent(_ value: Float?, forKey key: Key) throws {
+            if let value = value {
+                try encode(value, forKey: key)
+            } else if forcingNilValueSetters {
+                encoder.setters.append(Expression<Double?>(key.stringValue) <- nil)
+            }
+        }
+
+        func encodeIfPresent(_ value: Double?, forKey key: Key) throws {
+            if let value = value {
+                try encode(value, forKey: key)
+            } else if forcingNilValueSetters {
+                encoder.setters.append(Expression<Double?>(key.stringValue) <- nil)
+            }
+        }
+
+        func encodeIfPresent(_ value: String?, forKey key: MyKey) throws {
+            if let value = value {
+                try encode(value, forKey: key)
+            } else if forcingNilValueSetters {
+                encoder.setters.append(Expression<String?>(key.stringValue) <- nil)
+            }
+        }
+
         func encode<T>(_ value: T, forKey key: Key) throws where T: Swift.Encodable {
-            if let data = value as? Data {
+            switch value {
+            case let data as Data:
                 encoder.setters.append(Expression(key.stringValue) <- data)
-            } else if let date = value as? Date {
+            case let date as Date:
                 encoder.setters.append(Expression(key.stringValue) <- date.datatypeValue)
-            } else if let uuid = value as? UUID {
+            case let uuid as UUID:
                 encoder.setters.append(Expression(key.stringValue) <- uuid.datatypeValue)
-            } else {
+            default:
                 let encoded = try JSONEncoder().encode(value)
                 let string = String(data: encoded, encoding: .utf8)
                 encoder.setters.append(Expression(key.stringValue) <- string)
             }
+        }
+
+        func encodeIfPresent<T>(_ value: T?, forKey key: Key) throws where T: Swift.Encodable {
+            guard let value = value else {
+                guard forcingNilValueSetters else {
+                    return
+                }
+                encoder.setters.append(Expression<String?>(key.stringValue) <- nil)
+                return
+            }
+            try encode(value, forKey: key)
         }
 
         func encode(_ value: Int8, forKey key: Key) throws {
@@ -261,7 +325,7 @@ private class SQLiteEncoder: Encoder {
         }
 
         func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: Key)
-                        -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
+        -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
             fatalError("encoding a nested container is not supported")
         }
 
@@ -273,9 +337,11 @@ private class SQLiteEncoder: Encoder {
     fileprivate var setters: [Setter] = []
     let codingPath: [CodingKey] = []
     let userInfo: [CodingUserInfoKey: Any]
+    let forcingNilValueSetters: Bool
 
-    init(userInfo: [CodingUserInfoKey: Any]) {
+    init(userInfo: [CodingUserInfoKey: Any], forcingNilValueSetters: Bool = false) {
         self.userInfo = userInfo
+        self.forcingNilValueSetters = forcingNilValueSetters
     }
 
     func singleValueContainer() -> SingleValueEncodingContainer {
@@ -287,7 +353,7 @@ private class SQLiteEncoder: Encoder {
     }
 
     func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> where Key: CodingKey {
-        KeyedEncodingContainer(SQLiteKeyedEncodingContainer(encoder: self))
+        KeyedEncodingContainer(SQLiteKeyedEncodingContainer(encoder: self, forcingNilValueSetters: forcingNilValueSetters))
     }
 }
 
@@ -381,27 +447,32 @@ private class SQLiteDecoder: Decoder {
 
         func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T: Swift.Decodable {
             // swiftlint:disable force_cast
-            if type == Data.self {
+            switch type {
+            case is Data.Type:
                 let data = try row.get(Expression<Data>(key.stringValue))
                 return data as! T
-            } else if type == Date.self {
+            case is Date.Type:
                 let date = try row.get(Expression<Date>(key.stringValue))
                 return date as! T
+            case is UUID.Type:
+                let uuid = try row.get(Expression<UUID>(key.stringValue))
+                return uuid as! T
+            default:
+                // swiftlint:enable force_cast
+                guard let JSONString = try row.get(Expression<String?>(key.stringValue)) else {
+                    throw DecodingError.typeMismatch(type, DecodingError.Context(codingPath: codingPath,
+                                                                                 debugDescription: "an unsupported type was found"))
+                }
+                guard let data = JSONString.data(using: .utf8) else {
+                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath,
+                                                                            debugDescription: "invalid utf8 data found"))
+                }
+                return try JSONDecoder().decode(type, from: data)
             }
-            // swiftlint:enable force_cast
-            guard let JSONString = try row.get(Expression<String?>(key.stringValue)) else {
-                throw DecodingError.typeMismatch(type, DecodingError.Context(codingPath: codingPath,
-                                                                             debugDescription: "an unsupported type was found"))
-            }
-            guard let data = JSONString.data(using: .utf8) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath,
-                                                                        debugDescription: "invalid utf8 data found"))
-            }
-            return try JSONDecoder().decode(type, from: data)
         }
 
         func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws
-                        -> KeyedDecodingContainer<NestedKey> where NestedKey: CodingKey {
+        -> KeyedDecodingContainer<NestedKey> where NestedKey: CodingKey {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath,
                                                                     debugDescription: "decoding nested containers is not supported"))
         }

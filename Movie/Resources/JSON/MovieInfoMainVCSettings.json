@@ -1,30 +1,30 @@
 [
     {
-    "vcName": "MovieInfoViewController",
-    "title": "電影資料",
-    "normalImage": "movieclapper",
-    "selectedImage": "movieclapper.fill",
-    "navigationName": "NavigationController"
+        "vcName": "MovieInfoViewController",
+        "title": "電影資料",
+        "normalImage": "movieclapper",
+        "selectedImage": "movieclapper.fill",
+        "navigationName": "NavigationController"
     },
     {
-    "vcName": "StoreInfoViewController",
-    "title": "劇情簡介",
-    "normalImage": "doc.text",
-    "selectedImage": "doc.text.fill",
-    "navigationName": "NavigationController"
+        "vcName": "StoreInfoViewController",
+        "title": "劇情簡介",
+        "normalImage": "doc.text",
+        "selectedImage": "doc.text.fill",
+        "navigationName": "NavigationController"
     },
     {
-     "vcName": "MovieTimeTabsViewController",
-     "title": "播放時間",
-     "normalImage": "clock",
-     "selectedImage": "clock.fill",
-     "navigationName": "NavigationController"
+        "vcName": "MovieTimeTabsViewController",
+        "title": "播放時間",
+        "normalImage": "clock",
+        "selectedImage": "clock.fill",
+        "navigationName": "NavigationController"
     },
     {
-     "vcName": "VideoViewController",
-     "title": "預告片",
-     "normalImage": "video",
-     "selectedImage": "video.fill",
-     "navigationName": "NavigationController"
+        "vcName": "VideoViewController",
+        "title": "預告片",
+        "normalImage": "video",
+        "selectedImage": "video.fill",
+        "navigationName": "NavigationController"
     }
- ]
+]

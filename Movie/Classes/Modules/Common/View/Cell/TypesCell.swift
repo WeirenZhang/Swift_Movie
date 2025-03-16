@@ -54,6 +54,8 @@ class TypesCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
             
             guard let item else { return }
             
+            backgroundColor = UIColor.white
+            
             let layout = UICollectionViewFlowLayout()
             // 設置 section 的間距 四個數值分別代表 上、左、下、右 的間距
             //layout.sectionInset = UIEdgeInsets.init(top: 5, left: 5, bottom: 5, right: 5);
@@ -67,7 +69,7 @@ class TypesCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
             }
             
             TypeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            //TypeCollectionView.backgroundColor = UIColor.blue
+            TypeCollectionView.backgroundColor = UIColor.white
             TypeCollectionView.isScrollEnabled = false
             TypeCollectionView.register(TypeCell.self, forCellWithReuseIdentifier: "TypeCell")
             TypeCollectionView.delegate = self
@@ -100,7 +102,7 @@ class TypesCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionVie
             TypeCollectionView.collectionViewLayout.invalidateLayout()
             
             TimeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            //TimeCollectionView.backgroundColor = UIColor.red
+            TimeCollectionView.backgroundColor = UIColor.white
             TimeCollectionView.isScrollEnabled = false
             TimeCollectionView.register(TimeCell.self, forCellWithReuseIdentifier: "TimeCell")
             TimeCollectionView.delegate = self

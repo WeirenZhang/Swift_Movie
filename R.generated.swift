@@ -89,9 +89,21 @@ struct _R {
     var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 8 images.
+  /// This `_R.image` struct is generated, and contains static references to 18 images.
   struct image {
     let bundle: Foundation.Bundle
+
+    /// Image `clock`.
+    var clock: RswiftResources.ImageResource { .init(name: "clock", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `clock.fill`.
+    var clockFill: RswiftResources.ImageResource { .init(name: "clock.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `doc.text`.
+    var docText: RswiftResources.ImageResource { .init(name: "doc.text", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `doc.text.fill`.
+    var docTextFill: RswiftResources.ImageResource { .init(name: "doc.text.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `enl_1`.
     var enl_1: RswiftResources.ImageResource { .init(name: "enl_1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -116,6 +128,24 @@ struct _R {
 
     /// Image `ic_nodata`.
     var ic_nodata: RswiftResources.ImageResource { .init(name: "ic_nodata", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `movieclapper`.
+    var movieclapper: RswiftResources.ImageResource { .init(name: "movieclapper", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `movieclapper.fill`.
+    var movieclapperFill: RswiftResources.ImageResource { .init(name: "movieclapper.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `popcorn`.
+    var popcorn: RswiftResources.ImageResource { .init(name: "popcorn", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `popcorn.fill`.
+    var popcornFill: RswiftResources.ImageResource { .init(name: "popcorn.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `video`.
+    var video: RswiftResources.ImageResource { .init(name: "video", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `video.fill`.
+    var videoFill: RswiftResources.ImageResource { .init(name: "video.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
   /// This `_R.info` struct is generated, and contains static references to 1 properties.

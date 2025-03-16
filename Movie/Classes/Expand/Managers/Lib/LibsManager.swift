@@ -8,7 +8,6 @@
 
 import UIKit
 import NVActivityIndicatorView
-import IQKeyboardManagerSwift
 import Kingfisher
 import RxNetwork
 import Moya
@@ -19,18 +18,10 @@ class LibsManager {
 
     static func setupLibs(with window: UIWindow? = nil) {
 
-        setupKeyboardManager()
         setupNetwork()
         setupRouter()
         setupToast()
         setupReachability()
-    }
-
-    // MARK: - IQKeyboardManager
-    static func setupKeyboardManager() {
-
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
 
     // MARK: - Kingfisher

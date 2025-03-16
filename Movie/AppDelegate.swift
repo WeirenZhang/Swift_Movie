@@ -129,8 +129,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = HomeViewController()
         window!.makeKeyAndVisible()
         
-        try! db?.run(movie.create(ifNotExists: true, block: { (table) in
-            table.column(id, primaryKey: .autoincrement)
+        try? db?.run(movie.create(ifNotExists: true, block: { (table) in
+            table.column(id, primaryKey: true)
             table.column(ahref)
             table.column(imgsrc)
             table.column(release_movie_name)
@@ -138,8 +138,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             table.column(release_movie_time)
         }))
         
-        try! db?.run(theater.create(ifNotExists: true, block: { (table) in
-            table.column(id, primaryKey: .autoincrement)
+        try? db?.run(theater.create(ifNotExists: true, block: { (table) in
+            table.column(id, primaryKey: true)
             table.column(href)
             table.column(name)
             table.column(tel)

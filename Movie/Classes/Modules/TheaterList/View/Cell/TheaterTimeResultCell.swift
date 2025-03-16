@@ -99,7 +99,7 @@ class TheaterTimeResultCell: TableViewCell, Reusable {
             TheaterListName.snp.makeConstraints {
                 $0.left.equalTo(ReleaseFoto.snp.right).offset(10)
                 $0.right.equalToSuperview().offset(-10)
-                $0.height.equalTo(30)
+                //$0.height.equalTo(30)
                 $0.top.equalTo(10)
             }
             TheaterListName.text = item.theaterlist_name
@@ -108,8 +108,8 @@ class TheaterTimeResultCell: TableViewCell, Reusable {
             Length.snp.makeConstraints {
                 $0.left.equalTo(ReleaseFoto.snp.right).offset(10)
                 $0.right.equalToSuperview().offset(-10)
-                $0.height.equalTo(20)
-                $0.top.equalTo(TheaterListName.snp.bottom).offset(5)
+                //$0.height.equalTo(20)
+                $0.top.equalTo(TheaterListName.snp.bottom).offset(10)
             }
             Length.text = item.length
             
@@ -130,8 +130,8 @@ class TheaterTimeResultCell: TableViewCell, Reusable {
                 .set(to: Icon)
             
             //CollectionView.backgroundColor = UIColor.orange
-            CollectionView.delegate = self
-            CollectionView.dataSource = self
+            //CollectionView.delegate = self
+            //CollectionView.dataSource = self
             contentView.addSubview(CollectionView)
             
             CollectionView.snp.makeConstraints {

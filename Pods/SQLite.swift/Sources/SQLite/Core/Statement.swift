@@ -100,21 +100,24 @@ public final class Statement {
     }
 
     fileprivate func bind(_ value: Binding?, atIndex idx: Int) {
-        if value == nil {
+        switch value {
+        case .none:
             sqlite3_bind_null(handle, Int32(idx))
-        } else if let value = value as? Blob {
+        case let value as Blob where value.bytes.count == 0:
+            sqlite3_bind_zeroblob(handle, Int32(idx), 0)
+        case let value as Blob:
             sqlite3_bind_blob(handle, Int32(idx), value.bytes, Int32(value.bytes.count), SQLITE_TRANSIENT)
-        } else if let value = value as? Double {
+        case let value as Double:
             sqlite3_bind_double(handle, Int32(idx), value)
-        } else if let value = value as? Int64 {
+        case let value as Int64:
             sqlite3_bind_int64(handle, Int32(idx), value)
-        } else if let value = value as? String {
+        case let value as String:
             sqlite3_bind_text(handle, Int32(idx), value, -1, SQLITE_TRANSIENT)
-        } else if let value = value as? Int {
+        case let value as Int:
             self.bind(value.datatypeValue, atIndex: idx)
-        } else if let value = value as? Bool {
+        case let value as Bool:
             self.bind(value.datatypeValue, atIndex: idx)
-        } else if let value = value {
+        case .some(let value):
             fatalError("tried to bind unexpected value \(value)")
         }
     }
@@ -185,7 +188,11 @@ public final class Statement {
         try connection.sync { try connection.check(sqlite3_step(handle)) == SQLITE_ROW }
     }
 
-    fileprivate func reset(clearBindings shouldClear: Bool = true) {
+    public func reset() {
+        reset(clearBindings: true)
+    }
+
+    fileprivate func reset(clearBindings shouldClear: Bool) {
         sqlite3_reset(handle)
         if shouldClear { sqlite3_clear_bindings(handle) }
     }
@@ -229,8 +236,8 @@ extension Statement: FailableIterator {
 }
 
 extension Statement {
-    public func prepareRowIterator() -> RowIterator {
-        return RowIterator(statement: self, columnNames: self.columnNameMap)
+    func prepareRowIterator() -> RowIterator {
+        RowIterator(statement: self, columnNames: columnNameMap)
     }
 
     var columnNameMap: [String: Int] {

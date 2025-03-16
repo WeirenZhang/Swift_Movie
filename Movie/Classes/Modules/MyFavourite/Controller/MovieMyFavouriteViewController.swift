@@ -107,6 +107,9 @@ class MovieMyFavouriteViewController: TableViewController {
             cell.item = element
             cell.discard.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
             cell.discard.tag = row
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+            cell.selectedBackgroundView = backgroundView
             return cell
         }.disposed(by: rx.disposeBag)
         

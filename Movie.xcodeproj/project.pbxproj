@@ -152,6 +152,7 @@
 		CEEE689A2C934938005BEA51 /* TypesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE68992C934938005BEA51 /* TypesModel.swift */; };
 		CEEE689C2C93494C005BEA51 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE689B2C93494C005BEA51 /* TimeModel.swift */; };
 		CEEE689E2C934964005BEA51 /* TypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE689D2C934964005BEA51 /* TypeModel.swift */; };
+		CEF916132CDBC5BF00ADDDD9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF916122CDBC5BF00ADDDD9 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,6 +335,8 @@
 		CEEE68992C934938005BEA51 /* TypesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesModel.swift; sourceTree = "<group>"; };
 		CEEE689B2C93494C005BEA51 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
 		CEEE689D2C934964005BEA51 /* TypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModel.swift; sourceTree = "<group>"; };
+		CEF916122CDBC5BF00ADDDD9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CEF916172CDBCA6900ADDDD9 /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
 		D9269317BE288152A4D73A41 /* Pods-Movie-MovieUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie-MovieUITests.release.xcconfig"; path = "Target Support Files/Pods-Movie-MovieUITests/Pods-Movie-MovieUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F6EEC563C47C6367C87C03A7 /* Pods_Movie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -343,6 +346,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF916132CDBC5BF00ADDDD9 /* libsqlite3.tbd in Frameworks */,
 				9C0071D76ABD6548AB388609 /* Pods_Movie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,6 +395,7 @@
 		04135A3A27C2BCEA00C8A49E /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				CEF916172CDBCA6900ADDDD9 /* BridgeHeader.h */,
 				CE241C162C2717CA0014DA68 /* Resources */,
 				CE7372762B67C3EC00936613 /* Classes */,
 				04135A3B27C2BCEA00C8A49E /* AppDelegate.swift */,
@@ -451,6 +456,7 @@
 		58D790CF00AA5D6E21AEE752 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEF916122CDBC5BF00ADDDD9 /* libsqlite3.tbd */,
 				F6EEC563C47C6367C87C03A7 /* Pods_Movie.framework */,
 				A17D7F2507B964C7C7AD0BFD /* Pods_Movie_MovieUITests.framework */,
 				B408BDC3757854D57AC66D82 /* Pods_MovieTests.framework */,
@@ -1999,7 +2005,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B879689N59;
 				INFOPLIST_FILE = Movie/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Swift_Movie\nSwift_Movie\n";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2008,6 +2015,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kimo.Movie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Movie/BridgeHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2024,7 +2032,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B879689N59;
 				INFOPLIST_FILE = Movie/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "Swift_Movie\nSwift_Movie\n";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2033,6 +2042,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kimo.Movie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Movie/BridgeHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

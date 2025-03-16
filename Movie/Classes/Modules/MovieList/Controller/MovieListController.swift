@@ -78,6 +78,9 @@ class MovieListController: VMTableViewController<MovieListViewModel> {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", cellType: MovieListCell.self)
             cell.style = "Movie"
             cell.item = item
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+            cell.selectedBackgroundView = backgroundView
             return cell
         }
         .disposed(by: rx.disposeBag)

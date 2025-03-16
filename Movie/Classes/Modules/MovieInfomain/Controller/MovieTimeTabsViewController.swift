@@ -106,9 +106,9 @@ class MovieTimeTabsViewController: VMViewController<MovieTimeTabsViewModel> {
                                     height: menuH)
         
         listContainerView.frame = CGRect(x: 0,
-                                         y: .navigationBarBottomY + menuH + 60,
+                                         y: .navigationBarHeight + .statusBarHeight + menuH + 60,
                                          width: view.width,
-                                         height: view.height - .navigationBarBottomY - .tabBarTopY)
+                                         height: view.height - (.navigationBarHeight + .statusBarHeight + menuH + 60 + .tabBarHeight))
     }
     
     func setItem(_ item: MovieDateTabItemModel) {

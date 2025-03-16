@@ -71,7 +71,12 @@ class TheaterAreaController: VMTableViewController<TheaterAreaViewModel> {
         // TableView 数据源
         output.items.drive(tableView.rx.items) { tableView, row, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", cellType: UITableViewCell.self)
+            cell.backgroundColor = UIColor.white
             cell.textLabel?.text = item.theater_top
+            cell.textLabel!.textColor = UIColor.black
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1.0)
+            cell.selectedBackgroundView = backgroundView
             return cell
         }
         .disposed(by: rx.disposeBag)
